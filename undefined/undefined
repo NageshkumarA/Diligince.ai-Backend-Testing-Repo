@@ -1,0 +1,398 @@
+2025-08-11T16:45:19.173Z http: 
+Request: POST /api/V1/user/create-user IP: ::1
+
+2025-08-11T16:45:19.175Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T16:45:19.176Z http: Response: 404 5.772 ms 
+
+2025-08-11T16:45:26.280Z http: 
+Request: POST /api/user/create-user IP: ::1
+
+2025-08-11T16:45:26.281Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T16:45:26.281Z http: Response: 404 1.580 ms 
+
+2025-08-11T16:45:35.430Z http: 
+Request: POST /user/create-user IP: ::1
+
+2025-08-11T16:45:35.430Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T16:45:35.430Z http: Response: 404 1.462 ms 
+
+2025-08-11T16:49:43.210Z http: 
+Request: POST /user/create-user IP: ::1
+
+2025-08-11T16:49:43.212Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T16:49:43.213Z http: Response: 404 10.708 ms 
+
+2025-08-11T16:49:51.156Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T16:49:51.157Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T16:49:51.157Z http: Response: 404 3.200 ms 
+
+2025-08-11T17:06:23.739Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:06:23.741Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:06:23.741Z http: Response: 404 7.802 ms 
+
+2025-08-11T17:06:29.740Z http: 
+Request: POST /user/create-user IP: ::1
+
+2025-08-11T17:06:29.741Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:06:29.741Z http: Response: 404 1.605 ms 
+
+2025-08-11T17:10:02.229Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:10:02.230Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:10:02.230Z http: Response: 500 10.466 ms 
+
+2025-08-11T17:12:10.914Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:12:10.916Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:12:10.917Z http: Response: 500 12.686 ms 
+
+2025-08-11T17:13:21.300Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:13:21.302Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:13:21.303Z http: Response: 500 7.879 ms 
+
+2025-08-11T17:22:13.432Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:22:13.434Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:22:13.434Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-11T17:22:13.435Z http: Response: 200 24.843 ms 
+
+2025-08-11T17:22:46.794Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:22:46.796Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:22:46.796Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-11T17:22:46.797Z http: Response: 200 49.063 ms 
+
+2025-08-11T17:24:13.244Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:24:13.246Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:24:13.246Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-11T17:24:13.247Z http: Response: 200 20.226 ms 
+
+2025-08-11T17:24:48.097Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:24:48.101Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:24:48.101Z http: Response Body:
+{
+	"status": false,
+	"message": "Company name already exists"
+}
+
+2025-08-11T17:24:48.102Z http: Response: 400 27.881 ms 
+
+2025-08-11T17:25:16.339Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:25:16.339Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:25:16.339Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-11T17:25:16.339Z http: Response: 200 86.597 ms 
+
+2025-08-11T17:28:51.970Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:28:51.973Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123"
+}
+
+2025-08-11T17:28:51.974Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-11T17:28:51.974Z http: Response: 200 112.870 ms 
+
+2025-08-11T17:30:50.676Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:30:50.679Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123",
+	"role": "Industry"
+}
+
+2025-08-11T17:30:50.679Z http: Response Body:
+{
+	"status": false,
+	"message": "Company name already exists"
+}
+
+2025-08-11T17:30:50.679Z http: Response: 400 18.933 ms 
+
+2025-08-11T17:30:58.810Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:30:58.811Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123",
+	"role": "Industry"
+}
+
+2025-08-11T17:30:58.811Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-11T17:30:58.811Z http: Response: 200 115.334 ms 
+
+2025-08-11T17:31:44.133Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:31:44.135Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123",
+	"role": "Industry"
+}
+
+2025-08-11T17:31:44.135Z http: Response Body:
+{
+	"status": false,
+	"message": "Company name already exists"
+}
+
+2025-08-11T17:31:44.136Z http: Response: 400 21.859 ms 
+
+2025-08-11T17:31:51.434Z http: 
+Request: POST /api/v1/user/create-user IP: ::1
+
+2025-08-11T17:31:51.434Z http: Request Body:
+{
+	"accountType": "Industry",
+	"companyName": "Jindal Power",
+	"industryType": "Power Generation",
+	"termsAccepted": true,
+	"email": "kishoreofficial009@gmail.com",
+	"phone": "+919010131689",
+	"password": "SecurePass123",
+	"role": "Industry"
+}
+
+2025-08-11T17:31:51.435Z http: Response Body:
+{
+	"status": true,
+	"statusCode": 200,
+	"message": "Server is up & running",
+	"data": {}
+}
+
+2025-08-11T17:31:51.435Z http: Response: 200 90.745 ms 
+
