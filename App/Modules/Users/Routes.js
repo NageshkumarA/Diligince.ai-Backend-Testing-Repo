@@ -6,17 +6,33 @@ module.exports = (app, express) => {
     const Validators = require("./Validator");
     const config = require('../../../Configs/Config')
 
-    router.post('/user/create-user', (req,res)=>{
-        const userController = new UserController().boot(req,res)
+    /********************************************************
+	 user create api
+	*********************************************************/
+    router.post('/user/create-user', (req, res) => {
+        const userController = new UserController().boot(req, res)
         return userController.createUser();
     });
 
-    router.get('/user/get-profile', 
+/********************************************************
+	 user login api
+	*********************************************************/
+  router.post(
+    "/user/sign-in",
+    Validators.verifySignIn(),
+    Middleware.validateBody,
+    (req, res, next) => {
+      const userObj = new UserController().boot(req, res);
+      return userObj.userSignIn();
+    }
+  );
+
+    router.get('/user/get-profile',
         Middleware.isUserAuthorized, //for token validation
-        (req,res,next)=>{
-        const userController = new UserController().boot(req,res)
-        return userController.getProfile(); //controller method to return res
-    });
+        (req, res, next) => {
+            const userController = new UserController().boot(req, res)
+            return userController.getProfile(); //controller method to return res
+        });
 
     app.use(config.baseApiUrl, router);
 }

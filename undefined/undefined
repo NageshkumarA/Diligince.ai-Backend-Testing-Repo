@@ -396,3 +396,402 @@ Request: POST /api/v1/user/create-user IP: ::1
 
 2025-08-11T17:31:51.435Z http: Response: 200 90.745 ms 
 
+2025-08-15T06:17:04.752Z http: 
+Request: OPTIONS /api/signin IP: ::1
+
+2025-08-15T06:17:04.758Z http: Response: 204 2.570 ms 
+
+2025-08-15T06:17:05.246Z http: 
+Request: POST /api/signin IP: ::1
+
+2025-08-15T06:17:05.246Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "industry"
+}
+
+2025-08-15T06:17:05.247Z http: Response: 404 10.488 ms 
+
+2025-08-15T06:17:12.194Z http: 
+Request: OPTIONS /api/signin IP: ::1
+
+2025-08-15T06:17:12.195Z http: Response: 204 0.224 ms 
+
+2025-08-15T06:17:12.206Z http: 
+Request: POST /api/signin IP: ::1
+
+2025-08-15T06:17:12.206Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "industry"
+}
+
+2025-08-15T06:17:12.207Z http: Response: 404 3.587 ms 
+
+2025-08-15T06:17:48.246Z http: 
+Request: OPTIONS /api/v1/signin IP: ::1
+
+2025-08-15T06:17:48.248Z http: Response: 204 0.332 ms 
+
+2025-08-15T06:17:48.256Z http: 
+Request: POST /api/v1/signin IP: ::1
+
+2025-08-15T06:17:48.257Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "industry"
+}
+
+2025-08-15T06:17:48.257Z http: Response: 404 3.463 ms 
+
+2025-08-15T10:20:11.117Z http: 
+Request: OPTIONS /api/v1/signin IP: ::1
+
+2025-08-15T10:20:11.119Z http: Response: 204 3.918 ms 
+
+2025-08-15T10:20:11.366Z http: 
+Request: POST /api/v1/signin IP: ::1
+
+2025-08-15T10:20:11.366Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "industry"
+}
+
+2025-08-15T10:20:11.367Z http: Response: 404 9.833 ms 
+
+2025-08-15T10:58:28.902Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T10:58:28.905Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "industry"
+}
+
+2025-08-15T10:58:28.905Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T10:58:28.906Z http: Response: 200 15349.360 ms 
+
+2025-08-15T11:00:18.366Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T11:00:18.367Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "industry"
+}
+
+2025-08-15T11:00:18.368Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T11:00:18.368Z http: Response: 200 9145.247 ms 
+
+2025-08-15T11:03:55.436Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T11:03:55.442Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "industry"
+}
+
+2025-08-15T11:03:55.443Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T11:03:55.445Z http: Response: 200 196291.534 ms 
+
+2025-08-15T11:06:40.436Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T11:06:40.440Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T11:06:40.440Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T11:06:40.441Z http: Response: 200 13453.710 ms 
+
+2025-08-15T11:08:10.865Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T11:08:10.870Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T11:08:10.871Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T11:08:10.873Z http: Response: 200 16753.426 ms 
+
+2025-08-15T11:08:58.448Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T11:08:58.453Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T11:08:58.454Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T11:08:58.455Z http: Response: 200 17776.678 ms 
+
+2025-08-15T12:27:59.980Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:27:59.983Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:27:59.984Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 200,
+	"message": "Email not verified",
+	"data": {}
+}
+
+2025-08-15T12:27:59.985Z http: Response: 200 5098.116 ms 
+
+2025-08-15T12:29:16.893Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:29:16.894Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:29:16.894Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T12:29:16.895Z http: Response: 200 4629.832 ms 
+
+2025-08-15T12:31:01.268Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:31:01.271Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:31:01.271Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T12:31:01.273Z http: Response: 200 5130.600 ms 
+
+2025-08-15T12:32:13.222Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:32:13.226Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:32:13.226Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T12:32:13.227Z http: Response: 200 9374.880 ms 
+
+2025-08-15T12:34:56.293Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:34:56.302Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:34:56.306Z http: Response Body:
+{
+	"status": false,
+	"statusCode": 500,
+	"message": "Internal server error",
+	"data": null
+}
+
+2025-08-15T12:34:56.307Z http: Response: 200 218.574 ms 
+
+2025-08-15T12:36:20.866Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:36:20.869Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:36:20.869Z http: Response Body:
+{
+	"status": true,
+	"statusCode": 200,
+	"message": "Login Success",
+	"data": {
+		"isProfile": false,
+		"_id": "689a29078baf5b2b82080f71",
+		"phone": "+919010131689",
+		"email": "kishoreofficial009@gmail.com",
+		"role": "Industry",
+		"profileId": "689a29078baf5b2b82080f6f",
+		"createdAt": "2025-08-11T17:31:51.427Z",
+		"updatedAt": "2025-08-11T17:31:51.427Z",
+		"__v": 0,
+		"isEmailVerified": true,
+		"isPhoneVerified": true,
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGdvcml0aG0iOiJIUzI1NiIsImV4cCI6MTc1NTI2MTM5NSwiaWF0IjoxNzU1MjYxMzgwfQ.5AtaUH9YlpKoknK1ZurbUXeGUnFjzdK6opMXY1xF6Z4",
+		"tokenExpiryTime": "2025-08-15T12:51:20.820Z"
+	},
+	"meta": {
+		"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGdvcml0aG0iOiJIUzI1NiIsImV4cCI6MTc1NTI2MTM5NSwiaWF0IjoxNzU1MjYxMzgwfQ.5AtaUH9YlpKoknK1ZurbUXeGUnFjzdK6opMXY1xF6Z4"
+	}
+}
+
+2025-08-15T12:36:20.870Z http: Response: 200 150.603 ms 
+
+2025-08-15T12:39:36.713Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:39:36.715Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:39:36.716Z http: Response Body:
+{
+	"status": true,
+	"statusCode": 200,
+	"message": "Login Success",
+	"data": {
+		"isProfile": false,
+		"_id": "689a29078baf5b2b82080f71",
+		"phone": "+919010131689",
+		"email": "kishoreofficial009@gmail.com",
+		"role": "Industry",
+		"profileId": "689a29078baf5b2b82080f6f",
+		"createdAt": "2025-08-11T17:31:51.427Z",
+		"updatedAt": "2025-08-11T17:31:51.427Z",
+		"__v": 0,
+		"isEmailVerified": true,
+		"isPhoneVerified": true,
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGdvcml0aG0iOiJIUzI1NiIsImV4cCI6MTc1NTI2MTU5MCwiaWF0IjoxNzU1MjYxNTc1fQ.zryrej5HqtLZEAlFiS5_nXJXFuLJxVPhz7iIaMfhLPo",
+		"tokenExpiryTime": "2025-08-15T12:54:35.073Z"
+	},
+	"meta": {
+		"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGdvcml0aG0iOiJIUzI1NiIsImV4cCI6MTc1NTI2MTU5MCwiaWF0IjoxNzU1MjYxNTc1fQ.zryrej5HqtLZEAlFiS5_nXJXFuLJxVPhz7iIaMfhLPo"
+	}
+}
+
+2025-08-15T12:39:36.716Z http: Response: 200 8999.972 ms 
+
+2025-08-15T12:41:47.832Z http: 
+Request: POST /api/v1/user/sign-in IP: ::1
+
+2025-08-15T12:41:47.833Z http: Request Body:
+{
+	"email": "kishoreofficial009@gmail.com",
+	"password": "SecurePass123",
+	"type": "Industry"
+}
+
+2025-08-15T12:41:47.834Z http: Response Body:
+{
+	"status": true,
+	"statusCode": 200,
+	"message": "Login Success",
+	"data": {
+		"isProfile": false,
+		"_id": "689a29078baf5b2b82080f71",
+		"phone": "+919010131689",
+		"email": "kishoreofficial009@gmail.com",
+		"role": "Industry",
+		"profileId": "689a29078baf5b2b82080f6f",
+		"createdAt": "2025-08-11T17:31:51.427Z",
+		"updatedAt": "2025-08-11T17:31:51.427Z",
+		"__v": 0,
+		"isEmailVerified": true,
+		"isPhoneVerified": true,
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGdvcml0aG0iOiJIUzI1NiIsImV4cCI6MTc1NTI2MTY5MCwiaWF0IjoxNzU1MjYxNjc1fQ.VJXhkSyo8EYPqFTw4beMeaRn1ZEKA_REpgYxllUZIeE",
+		"tokenExpiryTime": "2025-08-15T12:56:15.527Z"
+	},
+	"meta": {
+		"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGdvcml0aG0iOiJIUzI1NiIsImV4cCI6MTc1NTI2MTY5MCwiaWF0IjoxNzU1MjYxNjc1fQ.VJXhkSyo8EYPqFTw4beMeaRn1ZEKA_REpgYxllUZIeE"
+	}
+}
+
+2025-08-15T12:41:47.834Z http: Response: 200 35333.208 ms 
+

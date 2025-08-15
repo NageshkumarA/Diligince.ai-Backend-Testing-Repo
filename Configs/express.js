@@ -79,7 +79,6 @@ module.exports = function () {
   }));
 
   app.use(express.json());
-
   // =======   Routing
   const modules = '/../App/Modules';
   glob(__dirname + modules + '/**/*Routes.js', {}, (err, files) => {

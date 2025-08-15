@@ -9,13 +9,13 @@ class Email {
             port: 465, 
             secure: true, 
             auth: {
-                user: 'your-email@gmail.com',
-                pass: 'your-app-password', 
+                user: 'Thinkvatesolutions1@gmail.com',
+                pass: 'dkhfzhwovjcaoogx', 
             },
             pool: true,
             debug: true,
         });
-        mailOption.from = "noreply@deligence.online";
+        mailOption.from = "Thinkvatesolutions1@gmail.com";
         smtpTransport.sendMail(mailOption, (err, result) => {
           if (err) {
             console.log("er =", err);

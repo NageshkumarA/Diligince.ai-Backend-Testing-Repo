@@ -32,8 +32,4 @@ app.use("/public", exp.static(__dirname + "/public"));
 app.listen(parseInt(config.serverPort), async () => {
   console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   console.log(`Server running at http://localhost:${config.serverPort}`);
-  // setTimeout(() => {
-  //   console.log("Loaded Routes:");
-  //   console.table(listEndpoints(app));
-  // }, 500);
 });
