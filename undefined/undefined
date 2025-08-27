@@ -899,3 +899,11 @@ hello world
 
 2025-08-27T10:41:40.103Z http: Response: 200 4.640 ms 
 
+2025-08-27T10:43:01.155Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-08-27T10:43:01.156Z http: Response Body:
+hello world
+
+2025-08-27T10:43:01.156Z http: Response: 200 2.490 ms 
+
