@@ -1051,3 +1051,11 @@ hello world
 
 2025-08-27T11:10:05.142Z http: Response: 200 1.775 ms 
 
+2025-08-27T11:11:12.110Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-08-27T11:11:12.110Z http: Response Body:
+hello world
+
+2025-08-27T11:11:12.110Z http: Response: 200 0.700 ms 
+
