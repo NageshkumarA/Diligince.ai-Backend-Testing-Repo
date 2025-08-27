@@ -4,7 +4,7 @@ const { IndustrySchema } = require("../Industry/Schema")
 const { UserSchema } = require('./Schema')
 const _ = require("lodash");
 
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 class UserController extends Controller {
     constructor() {
         super();
@@ -29,7 +29,7 @@ class UserController extends Controller {
             });
             await industryDoc.save();
 
-            const passwordHash = await bcrypt.hash(password, 10);
+            const passwordHash = await bcryptjs.hash(password, 10);
             const userDoc = new UserSchema({
                 email,
                 phone,
@@ -86,7 +86,7 @@ class UserController extends Controller {
 
             //check password
             let currentPassword = user.password
-            let passwdTest = await bcrypt.compare(data?.password, currentPassword)
+            let passwdTest = await bcryptjs.compare(data?.password, currentPassword)
             if (!passwdTest) {
                 return this.res.send({
                     status: false,

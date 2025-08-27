@@ -16,7 +16,7 @@ const ComplianceService = require('../../Services/ComplianceService');
 const DocumentService = require('../../Services/DocumentService');
 const AnalyticsService = require('../../Services/AnalyticsService');
 const _ = require("lodash");
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 
 class IndustryController extends Controller {
   constructor() {
