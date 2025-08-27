@@ -803,3 +803,11 @@ hello world
 
 2025-08-27T06:54:37.990Z http: Response: 200 7.285 ms 
 
+2025-08-27T06:55:58.481Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-08-27T06:55:58.482Z http: Response Body:
+hello world
+
+2025-08-27T06:55:58.482Z http: Response: 200 14.090 ms 
+
