@@ -31,6 +31,7 @@
     "morgan": "^1.10.1",
     "morgan-body": "^2.6.9",
     "nodemailer": "^7.0.5",
+    "socket.io": "^4.8.1",
     "start": "^5.1.0",
     "swagger-ui-express": "^4.1.6",
     "winston": "^3.17.0"
