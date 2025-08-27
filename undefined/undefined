@@ -851,3 +851,11 @@ hello world
 
 2025-08-27T09:23:17.328Z http: Response: 200 14.060 ms 
 
+2025-08-27T09:25:50.220Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-08-27T09:25:50.223Z http: Response Body:
+hello world
+
+2025-08-27T09:25:50.224Z http: Response: 200 12.800 ms 
+
