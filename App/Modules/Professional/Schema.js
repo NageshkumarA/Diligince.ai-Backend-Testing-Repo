@@ -1,23 +1,62 @@
-// modules/user/schema.js
 const mongoose = require('mongoose');
-const { required } = require('yargs');
+const { Schema } = mongoose;
 
-const user = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role:{type: String, required:true},
-    profileId:{type:string,required:true}
-    //   -----extra fields
-},
-  {
-    timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
-  });
-let userSchema = mongoose.model("users", user);
-const UserSchema = mongoose.model('User', userSchema);
+const professionalProfileSchema = new Schema({
+  firstName: { type: String, required: true, trim: true },
+  lastName: { type: String, required: true, trim: true },
+  title: { type: String, trim: true },
+  specialization: { type: String, required: true, trim: true },
+  experience: {
+    totalYears: { type: Number, required: true, min: 0 },
+    positions: [{
+      company: { type: String, trim: true },
+      role: { type: String, trim: true },
+      duration: { type: String, trim: true },
+      description: { type: String, trim: true }
+    }]
+  },
+  skills: [{ type: String, trim: true }],
+  certifications: [{
+    name: { type: String, required: true, trim: true },
+    issuer: { type: String, trim: true },
+    dateObtained: { type: Date },
+    expiryDate: { type: Date },
+    certificateUrl: { type: String }
+  }],
+  availability: {
+    isAvailable: { type: Boolean, default: true },
+    preferredProjects: [{ type: String }],
+    hourlyRate: { type: Number, min: 0 },
+    calendar: [{
+      date: { type: Date },
+      isAvailable: { type: Boolean },
+      timeSlots: [{ type: String }]
+    }]
+  },
+  location: { type: String, trim: true },
+  contactInfo: {
+    phone: { type: String, trim: true },
+    linkedIn: { type: String, trim: true },
+    portfolio: { type: String, trim: true }
+  },
+  rating: {
+    average: { type: Number, default: 0, min: 0, max: 5 },
+    count: { type: Number, default: 0 }
+  },
+  completedProjects: { type: Number, default: 0 },
+  isVerified: { type: Boolean, default: false }
+}, {
+  timestamps: true
+});
+
+// Create indexes
+professionalProfileSchema.index({ specialization: 1, 'availability.isAvailable': 1 });
+professionalProfileSchema.index({ location: 1 });
+professionalProfileSchema.index({ 'rating.average': -1 });
+professionalProfileSchema.index({ skills: 1 });
+
+const ProfessionalProfile = mongoose.model('ProfessionalProfile', professionalProfileSchema);
 
 module.exports = { 
-    userSchema,
-    UserSchema
-}
-
+  ProfessionalProfile
+};

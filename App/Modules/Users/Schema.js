@@ -2,15 +2,30 @@
 const mongoose = require('mongoose');
 const { required } = require('yargs');
 let schema = mongoose.Schema;
+
+// User preferences schema
+const userPreferencesSchema = new schema({
+  theme: { type: String, enum: ['light', 'dark', 'system'], default: 'light' },
+  notifications: {
+    email: { type: Boolean, default: true },
+    push: { type: Boolean, default: true },
+    sms: { type: Boolean, default: false },
+    marketing: { type: Boolean, default: false }
+  },
+  language: { type: String, default: 'en' },
+  timezone: { type: String, default: 'UTC' }
+});
+
 const user = new mongoose.Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, required: true },
+  role: { type: String, required: true, enum: ['industry', 'professional', 'vendor'] },
   profileId: { type: schema.Types.ObjectId, required: true },
   isProfile: { type: Boolean, default: false },
   isEmailVerified: { type: Boolean, default: false },
-  isPhoneVerified: { type: Boolean, default: false }
+  isPhoneVerified: { type: Boolean, default: false },
+  preferences: { type: userPreferencesSchema, default: () => ({}) }
 
   //   -----extra fields
 },
