@@ -931,3 +931,11 @@ hello world
 
 2025-08-27T10:49:08.137Z http: Response: 200 0.785 ms 
 
+2025-08-27T10:50:14.152Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-08-27T10:50:14.152Z http: Response Body:
+hello world
+
+2025-08-27T10:50:14.152Z http: Response: 200 1.865 ms 
+
