@@ -915,3 +915,11 @@ hello world
 
 2025-08-27T10:45:08.251Z http: Response: 200 1.875 ms 
 
+2025-08-27T10:48:01.125Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-08-27T10:48:01.126Z http: Response Body:
+hello world
+
+2025-08-27T10:48:01.126Z http: Response: 200 0.990 ms 
+
