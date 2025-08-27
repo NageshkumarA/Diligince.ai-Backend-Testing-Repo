@@ -1,23 +1,254 @@
 // middlewares/authorization.js
 const jwt = require('jsonwebtoken');
 const Authentication = require("../../Modules/Users/Schema").Authtokens;
+const { UserSchema } = require("../../Modules/Users/Schema");
+const { Role, Permission } = require("../../Modules/Auth/Schema");
 const config = require("../../../Configs/Config")
 const Moment = require("moment");
 
 class Middleware {
-  static isUserAuthorized(req, res, next) {
-    const token = req.header('x-auth-token');
-    if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
-
+  static async isUserAuthorized(req, res, next) {
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded.user;
+      const token = req.header('x-auth-token') || req.header('Authorization')?.replace('Bearer ', '');
+      
+      if (!token) {
+        return res.status(401).json({ 
+          status: false,
+          message: 'No token, authorization denied' 
+        });
+      }
+
+      // Verify token
+      const decoded = jwt.verify(token, config.securityToken);
+      
+      // Check if token exists in database and is not expired
+      const authToken = await Authentication.findOne({
+        userId: decoded.id,
+        'access_tokens.token': token,
+        'access_tokens.tokenExpiryTime': { $gt: new Date() }
+      });
+
+      if (!authToken) {
+        return res.status(401).json({ 
+          status: false,
+          message: 'Token is not valid or expired' 
+        });
+      }
+
+      // Get user details
+      const user = await UserSchema.findById(decoded.id).select('-password');
+      if (!user || !user.isActive) {
+        return res.status(401).json({ 
+          status: false,
+          message: 'User not found or inactive' 
+        });
+      }
+
+      req.user = {
+        id: user._id,
+        email: user.email,
+        role: user.role,
+        profileId: user.profileId,
+        isEmailVerified: user.isEmailVerified,
+        isPhoneVerified: user.isPhoneVerified
+      };
+      
       next();
     } catch (err) {
-      res.status(401).json({ message: 'Token is not valid' });
+      console.error('Auth middleware error:', err);
+      res.status(401).json({ 
+        status: false,
+        message: 'Token is not valid' 
+      });
     }
-  };
+  }
 
+  // Role-based authorization middleware
+  static requireRole(roles) {
+    return async (req, res, next) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({
+            status: false,
+            message: 'Authentication required'
+          });
+        }
+
+        const userRoles = Array.isArray(roles) ? roles : [roles];
+        
+        if (!userRoles.includes(req.user.role)) {
+          return res.status(403).json({
+            status: false,
+            message: 'Insufficient permissions'
+          });
+        }
+
+        next();
+      } catch (error) {
+        console.error('Role authorization error:', error);
+        res.status(500).json({
+          status: false,
+          message: 'Authorization error'
+        });
+      }
+    };
+  }
+
+  // Permission-based authorization middleware
+  static requirePermission(permission) {
+    return async (req, res, next) => {
+      try {
+        if (!req.user) {
+          return res.status(401).json({
+            status: false,
+            message: 'Authentication required'
+          });
+        }
+
+        // Get user role permissions
+        const role = await Role.findOne({ name: req.user.role });
+        if (!role || !role.permissions.includes(permission)) {
+          return res.status(403).json({
+            status: false,
+            message: 'Insufficient permissions'
+          });
+        }
+
+        next();
+      } catch (error) {
+        console.error('Permission authorization error:', error);
+        res.status(500).json({
+          status: false,
+          message: 'Authorization error'
+        });
+      }
+    };
+  }
+
+  // Email verification required middleware
+  static requireEmailVerification(req, res, next) {
+    if (!req.user) {
+      return res.status(401).json({
+        status: false,
+        message: 'Authentication required'
+      });
+    }
+
+    if (!req.user.isEmailVerified) {
+      return res.status(403).json({
+        status: false,
+        message: 'Email verification required'
+      });
+    }
+
+    next();
+  }
+
+  // Phone verification required middleware
+  static requirePhoneVerification(req, res, next) {
+    if (!req.user) {
+      return res.status(401).json({
+        status: false,
+        message: 'Authentication required'
+      });
+    }
+
+    if (!req.user.isPhoneVerified) {
+      return res.status(403).json({
+        status: false,
+        message: 'Phone verification required'
+      });
+    }
+
+    next();
+  }
+
+  // Rate limiting middleware
+  static rateLimit(maxRequests = 100, windowMs = 15 * 60 * 1000) {
+    const requests = new Map();
+
+    return (req, res, next) => {
+      const key = req.ip || req.connection.remoteAddress;
+      const now = Date.now();
+      const windowStart = now - windowMs;
+
+      // Clean old entries
+      if (requests.has(key)) {
+        const userRequests = requests.get(key).filter(time => time > windowStart);
+        requests.set(key, userRequests);
+      }
+
+      const userRequests = requests.get(key) || [];
+      
+      if (userRequests.length >= maxRequests) {
+        return res.status(429).json({
+          status: false,
+          message: 'Too many requests, please try again later'
+        });
+      }
+
+      userRequests.push(now);
+      requests.set(key, userRequests);
+      next();
+    };
+  }
+
+  // Company member authorization
+  static requireCompanyMember(req, res, next) {
+    if (!req.user) {
+      return res.status(401).json({
+        status: false,
+        message: 'Authentication required'
+      });
+    }
+
+    if (!['IndustryAdmin', 'IndustryMember'].includes(req.user.role)) {
+      return res.status(403).json({
+        status: false,
+        message: 'Company membership required'
+      });
+    }
+
+    next();
+  }
+
+  // Company admin authorization
+  static requireCompanyAdmin(req, res, next) {
+    if (!req.user) {
+      return res.status(401).json({
+        status: false,
+        message: 'Authentication required'
+      });
+    }
+
+    if (!['SuperAdmin', 'IndustryAdmin'].includes(req.user.role)) {
+      return res.status(403).json({
+        status: false,
+        message: 'Company admin privileges required'
+      });
+    }
+
+    next();
+  }
+
+  // Super admin authorization
+  static requireSuperAdmin(req, res, next) {
+    if (!req.user) {
+      return res.status(401).json({
+        status: false,
+        message: 'Authentication required'
+      });
+    }
+
+    if (req.user.role !== 'SuperAdmin') {
+      return res.status(403).json({
+        status: false,
+        message: 'Super admin privileges required'
+      });
+    }
+
+    next();
+  }
 
   processRequestBody(body, fieldsArray) {
     return new Promise((resolve, reject) => {
@@ -54,16 +285,21 @@ class Middleware {
     try {
       const { error, value } = req.schema.validate(req.body);
       if (error) {
-        const message = Array.isArray(error.details) ? error.details[0].message : error.message;
-        return new CommonService().handleReject(res, HTTP_CODE.FAILED, HTTP_CODE.UNPROCESSABLE_ENTITY, message)
-      }
-      if (error) {
-        return new CommonService().handleReject(res, HTTP_CODE.FAILED, HTTP_CODE.UNPROCESSABLE_ENTITY, error.details[0].message)
+        const message = error.details[0].message;
+        return res.status(422).json({
+          status: false,
+          statusCode: 422,
+          message: message,
+          data: null
+        });
       }
       req.body = value;
       next();
     } catch (error) {
-      return res.send({ status: 0, message: i18n.__("SERVER_ERROR") });
+      return res.status(500).json({ 
+        status: false, 
+        message: "Server error during validation" 
+      });
     }
   }
 
@@ -76,7 +312,7 @@ class Middleware {
         ********************************************************/
           let token = jwt.sign(
             {
-              id: params.id,
+              id: params._id,
               algorithm: "HS256",
               exp: Math.floor(Date.now() / 1000) + parseInt(config.tokenExpiry),
             },
@@ -88,7 +324,6 @@ class Middleware {
             parseInt(config.tokenExpirationTime),
             "minutes"
           );
-          delete params.id;
 
           /********************************************************
          Fetch user details from the server and update authtoken details
@@ -96,7 +331,7 @@ class Middleware {
           let fetchUser = await Authentication.findOne({
             userId: params.userId,
           });
-          console.log(fetchUser?._doc)
+          
           if (fetchUser) {
             let res = await Authentication.updateOne(
               { userId: params.userId },
@@ -109,7 +344,6 @@ class Middleware {
               },
               { new: true, upsert: true }
             ).exec();
-            console.log(res)
           } else {
             await Authentication.findOneAndUpdate(
               { userId: params.userId },
@@ -133,9 +367,6 @@ class Middleware {
       })();
     });
   }
-
-
-
-
 }
+
 module.exports = Middleware;

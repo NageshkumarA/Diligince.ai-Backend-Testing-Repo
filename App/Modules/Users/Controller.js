@@ -1,7 +1,6 @@
 const Middleware = require("../../Services/Middleware");
 const Controller = require("../Base/Controller")
-const { IndustrySchema } = require("../Industry/Schema")
-const { UserSchema } = require('./Schema')
+const { IndustrySchema, UserSchema } = require('./Schema')
 const _ = require("lodash");
 
 const bcryptjs = require('bcryptjs')
@@ -11,7 +10,7 @@ class UserController extends Controller {
     }
     async createUser() {
         try {
-            const { accountType, role, companyName, industryType, termsAccepted, email, phone, password } = this.req.body;
+            const { accountType, role = 'Industry', companyName, industryType, termsAccepted, email, phone, password } = this.req.body;
 
             const existingCompany = await IndustrySchema.findOne({ companyName: companyName.trim() });
             if (existingCompany) {
@@ -35,7 +34,7 @@ class UserController extends Controller {
                 phone,
                 password: passwordHash,
                 profileId: industryDoc._id,
-                role
+                role: role || 'Industry'
             });
             await userDoc.save();
 
@@ -74,7 +73,13 @@ class UserController extends Controller {
             );
             data.email = data.email.toString().toLowerCase();
             //check user exist or not
-            const user = await UserSchema.findOne({ email: data.email, role: data.type });
+            const user = await UserSchema.findOne({ 
+                email: data.email, 
+                $or: [
+                    { role: data.type },
+                    { role: data.type.charAt(0).toUpperCase() + data.type.slice(1) }
+                ]
+            });
             if (_.isEmpty(user)) {
                 return this.res.send({
                     status: false,
@@ -118,6 +123,10 @@ class UserController extends Controller {
                 })
             }
 
+            // Update last login
+            user.lastLoginAt = new Date();
+            user.loginAttempts = 0;
+            await user.save();
 
             let token = await new Middleware().UserToken(tokenData);
             delete tokenData?.token
@@ -139,13 +148,22 @@ class UserController extends Controller {
             })
         }
     }
+
     async getProfile() {
         try {
+            const userId = this.req.user?.id;
+            let profileData = {};
+
+            if (userId) {
+                const user = await UserSchema.findById(userId).select('-password');
+                profileData = user ? user.toObject() : {};
+            }
+
             this.res.send({
                 status: true,
                 statusCode: 200,
                 message: 'User Data',
-                data: {}
+                data: profileData
             })
         } catch (e) {
             console.log("Error on health check:\n", e)

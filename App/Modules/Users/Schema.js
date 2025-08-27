@@ -1,6 +1,5 @@
 // modules/user/schema.js
 const mongoose = require('mongoose');
-const { required } = require('yargs');
 let schema = mongoose.Schema;
 
 // User preferences schema
@@ -20,12 +19,29 @@ const user = new mongoose.Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, required: true, enum: ['industry', 'professional', 'vendor'] },
+  role: { 
+    type: String, 
+    required: true, 
+    enum: ['SuperAdmin', 'IndustryAdmin', 'IndustryMember', 'Professional', 'Vendor', 'Support'] 
+  },
   profileId: { type: schema.Types.ObjectId, required: true },
   isProfile: { type: Boolean, default: false },
   isEmailVerified: { type: Boolean, default: false },
   isPhoneVerified: { type: Boolean, default: false },
-  preferences: { type: userPreferencesSchema, default: () => ({}) }
+  preferences: { type: userPreferencesSchema, default: () => ({}) },
+  // Authentication fields
+  passwordResetToken: { type: String },
+  passwordResetExpiry: { type: Date },
+  emailVerificationToken: { type: String },
+  emailVerificationExpiry: { type: Date },
+  phoneVerificationCode: { type: String },
+  phoneVerificationExpiry: { type: Date },
+  lastLoginAt: { type: Date },
+  loginAttempts: { type: Number, default: 0 },
+  lockUntil: { type: Date },
+  isActive: { type: Boolean, default: true },
+  deactivatedAt: { type: Date },
+  deactivationReason: { type: String }
 
 },
   {
@@ -37,6 +53,10 @@ user.index({ email: 1 }, { unique: true });
 user.index({ role: 1 });
 user.index({ profileId: 1 });
 user.index({ isEmailVerified: 1, isPhoneVerified: 1 });
+user.index({ passwordResetToken: 1 });
+user.index({ emailVerificationToken: 1 });
+user.index({ lastLoginAt: -1 });
+user.index({ isActive: 1 });
 
 const UserSchema = mongoose.model('User', user);
 
@@ -62,9 +82,21 @@ authtokensSchema.index({ 'access_tokens.tokenExpiryTime': 1 });
 
 let Authtokens = mongoose.model('authtokens', authtokensSchema);
 
+// Industry Schema (for backward compatibility)
+const industrySchema = new schema({
+  accountType: { type: String, required: true },
+  companyName: { type: String, required: true, unique: true },
+  industryType: { type: String, required: true },
+  termsAccepted: { type: Boolean, required: true }
+}, {
+  timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" }
+});
+
+const IndustrySchema = mongoose.model('Industry', industrySchema);
 
 module.exports = {
   UserSchema,
-  Authtokens
+  Authtokens,
+  IndustrySchema
 }
 
