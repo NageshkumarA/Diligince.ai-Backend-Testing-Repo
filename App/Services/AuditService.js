@@ -30,6 +30,8 @@ auditLogSchema.index({ userId: 1, timestamp: -1 });
 auditLogSchema.index({ resource: 1, resourceId: 1 });
 auditLogSchema.index({ timestamp: -1 });
 auditLogSchema.index({ action: 1, severity: 1 });
+auditLogSchema.index({ outcome: 1 });
+auditLogSchema.index({ severity: 1, timestamp: -1 });
 
 const AuditLog = mongoose.model('AuditLog', auditLogSchema);
 

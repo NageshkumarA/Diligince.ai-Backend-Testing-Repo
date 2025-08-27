@@ -72,6 +72,9 @@ vendorProfileSchema.index({ 'serviceDetails.serviceCategories': 1 });
 vendorProfileSchema.index({ 'productDetails.productCategories': 1 });
 vendorProfileSchema.index({ 'rating.average': -1 });
 vendorProfileSchema.index({ companyName: 'text' });
+vendorProfileSchema.index({ isVerified: 1 });
+vendorProfileSchema.index({ 'logisticsDetails.coverage': 1 });
+vendorProfileSchema.index({ createdAt: -1 });
 
 const VendorProfile = mongoose.model('VendorProfile', vendorProfileSchema);
 

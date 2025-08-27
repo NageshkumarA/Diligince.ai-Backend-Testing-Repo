@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Email = require('./Email');
-const Sms = require('./Sms');
 
 // Notification Schema
 const notificationSchema = new Schema({
@@ -32,12 +31,18 @@ const notificationSchema = new Schema({
   timestamps: true
 });
 
+// Create indexes for Notifications
+notificationSchema.index({ userId: 1, read: 1 });
+notificationSchema.index({ createdAt: -1 });
+notificationSchema.index({ type: 1, priority: 1 });
+notificationSchema.index({ relatedId: 1, relatedType: 1 });
+notificationSchema.index({ actionRequired: 1 });
+
 const Notification = mongoose.model('Notification', notificationSchema);
 
 class NotificationService {
   constructor() {
     this.emailService = new Email();
-    this.smsService = new Sms();
   }
 
   async send(notificationData) {
@@ -57,12 +62,6 @@ class NotificationService {
       // Send email notification if enabled
       if (user.preferences?.notifications?.email !== false) {
         await this.sendEmailNotification(user, notification);
-      }
-
-      // Send SMS notification if enabled and high priority
-      if (user.preferences?.notifications?.sms === true && 
-          notification.priority === 'high') {
-        await this.sendSMSNotification(user, notification);
       }
 
       return notification;
@@ -88,15 +87,6 @@ class NotificationService {
       await this.emailService.send(mailOptions);
     } catch (error) {
       console.error('Error sending email notification:', error);
-    }
-  }
-
-  async sendSMSNotification(user, notification) {
-    try {
-      const smsMessage = `${notification.title}: ${notification.message}`;
-      await this.smsService.send(user.phone, smsMessage);
-    } catch (error) {
-      console.error('Error sending SMS notification:', error);
     }
   }
 

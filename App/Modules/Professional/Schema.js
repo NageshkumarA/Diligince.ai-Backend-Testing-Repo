@@ -54,6 +54,9 @@ professionalProfileSchema.index({ specialization: 1, 'availability.isAvailable':
 professionalProfileSchema.index({ location: 1 });
 professionalProfileSchema.index({ 'rating.average': -1 });
 professionalProfileSchema.index({ skills: 1 });
+professionalProfileSchema.index({ 'experience.totalYears': -1 });
+professionalProfileSchema.index({ isVerified: 1 });
+professionalProfileSchema.index({ createdAt: -1 });
 
 const ProfessionalProfile = mongoose.model('ProfessionalProfile', professionalProfileSchema);
 

@@ -380,21 +380,27 @@ const complianceRecordSchema = new Schema({
 requirementSchema.index({ industryId: 1, status: 1 });
 requirementSchema.index({ category: 1, priority: 1 });
 requirementSchema.index({ publishedAt: -1 });
+requirementSchema.index({ createdAt: -1 });
 
 rfqSchema.index({ stakeholderId: 1, status: 1 });
 rfqSchema.index({ requirementId: 1 });
 rfqSchema.index({ dueDate: 1 });
+rfqSchema.index({ createdAt: -1 });
 
 quoteSchema.index({ rfqId: 1 });
 quoteSchema.index({ stakeholderId: 1, status: 1 });
 quoteSchema.index({ validUntil: 1 });
+quoteSchema.index({ createdAt: -1 });
 
 purchaseOrderSchema.index({ poNumber: 1 });
 purchaseOrderSchema.index({ industryId: 1, status: 1 });
 purchaseOrderSchema.index({ vendorId: 1, status: 1 });
+purchaseOrderSchema.index({ createdAt: -1 });
 
 workflowActivitySchema.index({ purchaseOrderId: 1, timestamp: -1 });
 complianceRecordSchema.index({ entityId: 1, entityType: 1 });
+complianceRecordSchema.index({ assessmentDate: -1 });
+complianceRecordSchema.index({ standard: 1, status: 1 });
 
 // Export models
 const IndustryProfile = mongoose.model('IndustryProfile', industryProfileSchema);

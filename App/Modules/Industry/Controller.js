@@ -13,6 +13,8 @@ const { UserSchema } = require('../Users/Schema');
 const NotificationService = require('../../Services/NotificationService');
 const AuditService = require('../../Services/AuditService');
 const ComplianceService = require('../../Services/ComplianceService');
+const DocumentService = require('../../Services/DocumentService');
+const AnalyticsService = require('../../Services/AnalyticsService');
 const _ = require("lodash");
 const bcrypt = require('bcryptjs');
 
@@ -22,6 +24,8 @@ class IndustryController extends Controller {
     this.notificationService = new NotificationService();
     this.auditService = new AuditService();
     this.complianceService = new ComplianceService();
+    this.documentService = new DocumentService();
+    this.analyticsService = new AnalyticsService();
   }
 
   // Industry Profile Management
@@ -791,28 +795,12 @@ class IndustryController extends Controller {
   async getDashboardAnalytics() {
     try {
       const industryId = this.req.user.profileId;
+      const { startDate, endDate } = this.req.query;
 
-      const [
-        totalRequirements,
-        activeRFQs,
-        pendingQuotes,
-        activePOs,
-        complianceScore
-      ] = await Promise.all([
-        Requirement.countDocuments({ industryId }),
-        RFQ.countDocuments({ industryId, status: { $in: ['sent', 'viewed'] } }),
-        Quote.countDocuments({ status: 'submitted' }),
-        PurchaseOrder.countDocuments({ industryId, status: { $in: ['issued', 'in_progress'] } }),
-        this.complianceService.calculateOverallScore(industryId)
-      ]);
-
-      const analytics = {
-        totalRequirements,
-        activeRFQs,
-        pendingQuotes,
-        activePOs,
-        complianceScore: complianceScore || 0
-      };
+      const analytics = await this.analyticsService.getDashboardMetrics(
+        industryId, 
+        { startDate, endDate }
+      );
 
       this.res.send({
         status: true,
@@ -822,6 +810,245 @@ class IndustryController extends Controller {
       });
     } catch (error) {
       console.error("Error retrieving dashboard analytics:", error);
+      this.res.status(500).send({
+        status: false,
+        statusCode: 500,
+        message: 'Internal server error',
+        data: null
+      });
+    }
+  }
+
+  async getPerformanceAnalytics() {
+    try {
+      const industryId = this.req.user.profileId;
+      const { startDate, endDate } = this.req.query;
+
+      const performance = await this.analyticsService.getVendorPerformance(
+        industryId,
+        { startDate, endDate }
+      );
+
+      this.res.send({
+        status: true,
+        statusCode: 200,
+        message: 'Performance analytics retrieved successfully',
+        data: performance
+      });
+    } catch (error) {
+      console.error("Error retrieving performance analytics:", error);
+      this.res.status(500).send({
+        status: false,
+        statusCode: 500,
+        message: 'Internal server error',
+        data: null
+      });
+    }
+  }
+
+  async getSpendingAnalytics() {
+    try {
+      const industryId = this.req.user.profileId;
+      const { startDate, endDate } = this.req.query;
+
+      const spending = await this.analyticsService.getSpendingAnalysis(
+        industryId,
+        { startDate, endDate }
+      );
+
+      this.res.send({
+        status: true,
+        statusCode: 200,
+        message: 'Spending analytics retrieved successfully',
+        data: spending
+      });
+    } catch (error) {
+      console.error("Error retrieving spending analytics:", error);
+      this.res.status(500).send({
+        status: false,
+        statusCode: 500,
+        message: 'Internal server error',
+        data: null
+      });
+    }
+  }
+
+  // Document Management Implementation
+  async uploadDocument() {
+    try {
+      // This would typically handle file upload via multer middleware
+      // For now, we'll simulate the document upload process
+      const { entityId, entityType, category, name } = this.req.body;
+      
+      // Simulate file data
+      const fileData = {
+        buffer: Buffer.from('sample document content'),
+        originalName: name || 'document.pdf',
+        mimeType: 'application/pdf',
+        size: 1024
+      };
+
+      const metadata = {
+        entityId,
+        entityType,
+        category,
+        uploadedBy: this.req.user.id
+      };
+
+      const document = await this.documentService.uploadDocument(fileData, metadata);
+
+      await this.auditService.log({
+        userId: this.req.user.id,
+        action: 'UPLOAD_DOCUMENT',
+        resource: 'Document',
+        resourceId: document._id,
+        changes: { name: document.originalName, entityType, entityId }
+      });
+
+      this.res.send({
+        status: true,
+        statusCode: 201,
+        message: 'Document uploaded successfully',
+        data: document
+      });
+    } catch (error) {
+      console.error("Error uploading document:", error);
+      this.res.status(500).send({
+        status: false,
+        statusCode: 500,
+        message: 'Internal server error',
+        data: null
+      });
+    }
+  }
+
+  async getDocuments() {
+    try {
+      const { page = 1, limit = 20, entityType, entityId } = this.req.query;
+      
+      const filter = {};
+      if (entityType) filter.entityType = entityType;
+      if (entityId) filter.entityId = entityId;
+
+      const result = await this.documentService.getDocuments(filter, { page, limit });
+
+      this.res.send({
+        status: true,
+        statusCode: 200,
+        message: 'Documents retrieved successfully',
+        data: result
+      });
+    } catch (error) {
+      console.error("Error retrieving documents:", error);
+      this.res.status(500).send({
+        status: false,
+        statusCode: 500,
+        message: 'Internal server error',
+        data: null
+      });
+    }
+  }
+
+  async downloadDocument() {
+    try {
+      const { id } = this.req.params;
+      
+      const document = await this.documentService.getDocument(id);
+      
+      if (!document) {
+        return this.res.status(404).send({
+          status: false,
+          message: 'Document not found'
+        });
+      }
+
+      // In a real implementation, this would stream the file
+      this.res.send({
+        status: true,
+        statusCode: 200,
+        message: 'Document retrieved successfully',
+        data: {
+          ...document.toObject(),
+          downloadUrl: document.url
+        }
+      });
+    } catch (error) {
+      console.error("Error downloading document:", error);
+      this.res.status(500).send({
+        status: false,
+        statusCode: 500,
+        message: 'Internal server error',
+        data: null
+      });
+    }
+  }
+
+  async deleteDocument() {
+    try {
+      const { id } = this.req.params;
+      
+      const document = await this.documentService.deleteDocument(id, this.req.user.id);
+
+      await this.auditService.log({
+        userId: this.req.user.id,
+        action: 'DELETE_DOCUMENT',
+        resource: 'Document',
+        resourceId: document._id,
+        changes: { deleted: true }
+      });
+
+      this.res.send({
+        status: true,
+        statusCode: 200,
+        message: 'Document deleted successfully',
+        data: null
+      });
+    } catch (error) {
+      console.error("Error deleting document:", error);
+      this.res.status(500).send({
+        status: false,
+        statusCode: 500,
+        message: 'Internal server error',
+        data: null
+      });
+    }
+  }
+
+  async createDocumentVersion() {
+    try {
+      const { id } = this.req.params;
+      const { name } = this.req.body;
+      
+      // Simulate file data for new version
+      const fileData = {
+        buffer: Buffer.from('updated document content'),
+        originalName: name || 'document_v2.pdf',
+        mimeType: 'application/pdf',
+        size: 1024
+      };
+
+      const metadata = {
+        uploadedBy: this.req.user.id
+      };
+
+      const newVersion = await this.documentService.createDocumentVersion(id, fileData, metadata);
+
+      await this.auditService.log({
+        userId: this.req.user.id,
+        action: 'CREATE_DOCUMENT_VERSION',
+        resource: 'Document',
+        resourceId: newVersion._id,
+        changes: { parentDocumentId: id, version: newVersion.version }
+      });
+
+      this.res.send({
+        status: true,
+        statusCode: 201,
+        message: 'Document version created successfully',
+        data: newVersion
+      });
+    } catch (error) {
+      console.error("Error creating document version:", error);
       this.res.status(500).send({
         status: false,
         statusCode: 500,

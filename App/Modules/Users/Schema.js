@@ -27,11 +27,17 @@ const user = new mongoose.Schema({
   isPhoneVerified: { type: Boolean, default: false },
   preferences: { type: userPreferencesSchema, default: () => ({}) }
 
-  //   -----extra fields
 },
   {
     timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
   });
+
+// Create indexes for Users
+user.index({ email: 1 }, { unique: true });
+user.index({ role: 1 });
+user.index({ profileId: 1 });
+user.index({ isEmailVerified: 1, isPhoneVerified: 1 });
+
 const UserSchema = mongoose.model('User', user);
 
 let authtokensSchema = new schema({
@@ -47,6 +53,12 @@ let authtokensSchema = new schema({
   }]
 },
   { timestamps: true });
+
+// Create indexes for Authtokens
+authtokensSchema.index({ userId: 1 });
+authtokensSchema.index({ adminId: 1 });
+authtokensSchema.index({ 'access_tokens.token': 1 });
+authtokensSchema.index({ 'access_tokens.tokenExpiryTime': 1 });
 
 let Authtokens = mongoose.model('authtokens', authtokensSchema);
 
