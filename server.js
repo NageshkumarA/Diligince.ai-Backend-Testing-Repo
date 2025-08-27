@@ -12,7 +12,7 @@ const listEndpoints = require('express-list-endpoints');
 
 i18n.configure({
   locales: ["en", "es", "de"],
-  directory: __dirname + "/app/locales",
+  directory: __dirname + "/App/locales",
   defaultLocale: "en",
 });
 const swaggerUi = require("swagger-ui-express");
