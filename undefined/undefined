@@ -1027,3 +1027,11 @@ hello world
 
 2025-08-27T11:06:16.226Z http: Response: 200 1.545 ms 
 
+2025-08-27T11:07:23.157Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-08-27T11:07:23.157Z http: Response Body:
+hello world
+
+2025-08-27T11:07:23.157Z http: Response: 200 1.495 ms 
+
