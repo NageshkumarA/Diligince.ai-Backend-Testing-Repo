@@ -1203,3 +1203,11 @@ hello world
 
 2025-09-02T10:14:46.221Z http: Response: 200 2.470 ms 
 
+2025-09-02T10:15:53.226Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-09-02T10:15:53.227Z http: Response Body:
+hello world
+
+2025-09-02T10:15:53.227Z http: Response: 200 3.015 ms 
+
