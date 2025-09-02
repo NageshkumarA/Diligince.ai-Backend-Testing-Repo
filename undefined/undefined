@@ -1219,3 +1219,11 @@ hello world
 
 2025-09-02T10:17:00.223Z http: Response: 200 1.640 ms 
 
+2025-09-02T10:17:26.975Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-09-02T10:17:26.976Z http: Response Body:
+hello world
+
+2025-09-02T10:17:26.982Z http: Response: 200 66.560 ms 
+
