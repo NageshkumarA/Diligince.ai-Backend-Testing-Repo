@@ -1131,3 +1131,11 @@ Request: POST /api/v1/auth/register IP: ::1
 
 2025-08-28T16:12:13.897Z http: Response: 400 51441.367 ms 
 
+2025-09-02T09:57:14.491Z http: 
+Request: GET / IP: 127.0.0.1
+
+2025-09-02T09:57:14.510Z http: Response Body:
+hello world
+
+2025-09-02T09:57:14.510Z http: Response: 200 13.420 ms 
+
