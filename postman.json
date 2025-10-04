@@ -1,0 +1,2769 @@
+{
+  "info": {
+    "name": "Diligince.ai Backend API Collection",
+    "description": "Complete API collection for Diligince.ai backend testing organized by modules",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "apiVersion",
+      "value": "/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Base Module",
+      "description": "Health check and basic server endpoints",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/base/health-check",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "base", "health-check"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Server Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authentication Module",
+      "description": "User authentication, registration, and account management",
+      "item": [
+        {
+          "name": "User Registration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"phone\": \"+1234567890\",\n  \"role\": \"IndustryAdmin\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"companyName\": \"Example Corp\",\n  \"termsAccepted\": true,\n  \"privacyAccepted\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"rememberMe\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": \"your_refresh_token_here\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/refresh-token",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "refresh-token"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/forgot-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "forgot-password"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"reset_token_here\",\n  \"newPassword\": \"NewSecurePass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/reset-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "reset-password"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"verification_token_here\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/verify-email",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "verify-email"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "me"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"bio\": \"Software Engineer\",\n  \"address\": {\n    \"city\": \"New York\",\n    \"country\": \"USA\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"SecurePass123!\",\n  \"newPassword\": \"NewSecurePass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/change-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "change-password"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/roles",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "roles"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Management Module",
+      "description": "User creation, profile management, and user operations",
+      "item": [
+        {
+          "name": "Create User (Legacy)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountType\": \"Industry\",\n  \"companyName\": \"Jindal Power\",\n  \"industryType\": \"Power Generation\",\n  \"termsAccepted\": true,\n  \"email\": \"user@example.com\",\n  \"phone\": \"+919010131689\",\n  \"password\": \"SecurePass123\",\n  \"role\": \"Industry\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/user/create-user",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "user", "create-user"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User Sign In (Legacy)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"SecurePass123\",\n  \"type\": \"Industry\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/user/sign-in",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "user", "sign-in"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/user/get-profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "user", "get-profile"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Industry Module",
+      "description": "Industry profile, requirements, RFQs, quotes, and purchase orders",
+      "item": [
+        {
+          "name": "Create Industry Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyName\": \"Tech Industries Ltd\",\n  \"industryType\": \"Manufacturing\",\n  \"companySize\": \"201-1000\",\n  \"annualRevenue\": \"$50M-$100M\",\n  \"headquartersLocation\": \"New York, USA\",\n  \"operatingRegions\": [\"North America\", \"Europe\"],\n  \"complianceCertifications\": [\"ISO-9001\", \"ISO-27001\"],\n  \"contactInfo\": {\n    \"primaryContact\": \"John Smith\",\n    \"phone\": \"+1-555-0123\",\n    \"address\": \"123 Business Ave, NY 10001\",\n    \"website\": \"https://techindustries.com\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Industry Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/profile/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "profile", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "profile_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Requirement",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Software Development Services\",\n  \"description\": \"We need a team to develop a custom ERP solution\",\n  \"category\": \"Software Development\",\n  \"priority\": \"high\",\n  \"budget\": {\n    \"min\": 50000,\n    \"max\": 100000,\n    \"currency\": \"USD\"\n  },\n  \"timeline\": {\n    \"startDate\": \"2024-02-01T00:00:00Z\",\n    \"endDate\": \"2024-08-01T00:00:00Z\",\n    \"milestones\": [\n      {\n        \"name\": \"Requirements Analysis\",\n        \"date\": \"2024-03-01T00:00:00Z\",\n        \"description\": \"Complete requirements gathering\"\n      }\n    ]\n  },\n  \"technicalSpecs\": {\n    \"technology\": \"Node.js, React\",\n    \"database\": \"MongoDB\",\n    \"hosting\": \"AWS\"\n  },\n  \"complianceRequirements\": [\"ISO-27001\", \"GDPR\"],\n  \"deliverables\": [\n    {\n      \"name\": \"Technical Documentation\",\n      \"description\": \"Complete system documentation\",\n      \"dueDate\": \"2024-07-15T00:00:00Z\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/requirements",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "requirements"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Requirements",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/requirements?page=1&limit=10&status=published",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "requirements"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "published"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve Requirement",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comments\": \"Requirement approved for publication\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/requirements/:id/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "requirements", ":id", "approve"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "requirement_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Publish Requirement",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stakeholderIds\": [\n    {\n      \"id\": \"vendor_id_1\",\n      \"type\": \"vendor\"\n    },\n    {\n      \"id\": \"professional_id_1\",\n      \"type\": \"professional\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/requirements/:id/publish",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "requirements", ":id", "publish"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "requirement_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get RFQs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/rfqs?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "rfqs"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get RFQ Responses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/rfqs/:id/responses",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "rfqs", ":id", "responses"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "rfq_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Quotes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/quotes?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "quotes"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Evaluate Quote",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"score\": 85,\n  \"notes\": \"Good technical proposal, competitive pricing\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/quotes/:id/evaluate",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "quotes", ":id", "evaluate"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "quote_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Accept Quote",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/quotes/:id/accept",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "quotes", ":id", "accept"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "quote_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Purchase Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vendorId\": \"vendor_id_here\",\n  \"requirementId\": \"requirement_id_here\",\n  \"quoteId\": \"quote_id_here\",\n  \"projectTitle\": \"ERP System Development\",\n  \"orderValue\": 75000,\n  \"taxPercentage\": 10,\n  \"startDate\": \"2024-02-01T00:00:00Z\",\n  \"endDate\": \"2024-08-01T00:00:00Z\",\n  \"paymentTerms\": \"30 days net\",\n  \"scopeOfWork\": \"Development of custom ERP solution with modules for inventory, accounting, and HR\",\n  \"deliverables\": [\n    {\n      \"description\": \"System Design Document\",\n      \"dueDate\": \"2024-03-01T00:00:00Z\"\n    }\n  ],\n  \"paymentMilestones\": [\n    {\n      \"description\": \"Project Kickoff\",\n      \"percentage\": 25,\n      \"dueDate\": \"2024-02-15T00:00:00Z\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/purchase-orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "purchase-orders"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Purchase Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/purchase-orders?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "purchase-orders"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve Purchase Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comments\": \"Purchase order approved for execution\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/purchase-orders/:id/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "purchase-orders", ":id", "approve"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "po_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Workflows",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/workflows",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "workflows"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Dashboard Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/analytics/dashboard?startDate=2024-01-01&endDate=2024-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "analytics", "dashboard"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Professional Module",
+      "description": "Professional profiles, opportunities, applications, and earnings",
+      "item": [
+        {
+          "name": "Get Professional Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/dashboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "dashboard"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Opportunities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/opportunities?page=1&limit=20&category=Software Development",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "opportunities"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "category",
+                  "value": "Software Development"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Apply for Opportunity",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverLetter\": \"I am excited to apply for this opportunity. With 5 years of experience in software development, I believe I can deliver excellent results for your project.\",\n  \"proposedRate\": {\n    \"amount\": 75,\n    \"currency\": \"USD\",\n    \"type\": \"hourly\"\n  },\n  \"estimatedTimeline\": {\n    \"startDate\": \"2024-02-01T00:00:00Z\",\n    \"endDate\": \"2024-07-01T00:00:00Z\",\n    \"estimatedHours\": 800\n  },\n  \"portfolio\": [\n    {\n      \"title\": \"E-commerce Platform\",\n      \"description\": \"Built a full-stack e-commerce solution\",\n      \"url\": \"https://github.com/user/ecommerce\",\n      \"technologies\": [\"React\", \"Node.js\", \"MongoDB\"]\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/opportunities/:id/apply",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "opportunities", ":id", "apply"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "opportunity_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Applications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/applications?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "applications"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Professional Calendar",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/calendar?startDate=2024-01-01&endDate=2024-01-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "calendar"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-01-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Set Availability",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"2024-02-01\",\n  \"timeSlots\": [\n    {\n      \"startTime\": \"09:00\",\n      \"endTime\": \"10:00\",\n      \"isAvailable\": true\n    },\n    {\n      \"startTime\": \"14:00\",\n      \"endTime\": \"16:00\",\n      \"isAvailable\": true\n    }\n  ],\n  \"timezone\": \"UTC\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/availability",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "availability"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Earnings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/earnings?period=month&year=2024&month=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "earnings"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "month"
+                },
+                {
+                  "key": "year",
+                  "value": "2024"
+                },
+                {
+                  "key": "month",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Certifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/certifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "certifications"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Certification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"AWS Certified Solutions Architect\",\n  \"issuer\": \"Amazon Web Services\",\n  \"issueDate\": \"2023-06-15T00:00:00Z\",\n  \"expiryDate\": \"2026-06-15T00:00:00Z\",\n  \"credentialId\": \"AWS-CSA-123456\",\n  \"skills\": [\"AWS\", \"Cloud Architecture\", \"DevOps\"],\n  \"category\": \"technical\",\n  \"level\": \"advanced\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/certifications",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "certifications"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Professional Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"title\": \"Senior Software Engineer\",\n  \"specialization\": \"Full Stack Development\",\n  \"bio\": \"Experienced software engineer with expertise in modern web technologies\",\n  \"skills\": [\"JavaScript\", \"React\", \"Node.js\", \"MongoDB\", \"AWS\"],\n  \"experience\": {\n    \"totalYears\": 5,\n    \"positions\": [\n      {\n        \"company\": \"Tech Corp\",\n        \"role\": \"Senior Developer\",\n        \"startDate\": \"2020-01-01T00:00:00Z\",\n        \"endDate\": \"2023-12-31T00:00:00Z\",\n        \"isCurrent\": false,\n        \"description\": \"Led development of multiple web applications\"\n      }\n    ]\n  },\n  \"availability\": {\n    \"isAvailable\": true,\n    \"hourlyRate\": 75,\n    \"minimumRate\": 50,\n    \"maximumRate\": 100\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "profile"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Communication Module",
+      "description": "Messaging, notifications, and tracking system",
+      "item": [
+        {
+          "name": "Get Messages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/messages?conversationId=conversation_id_here&page=1&limit=50",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "messages"],
+              "query": [
+                {
+                  "key": "conversationId",
+                  "value": "conversation_id_here"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversationId\": \"conversation_id_here\",\n  \"content\": \"Hello, I wanted to discuss the project requirements.\",\n  \"type\": \"text\",\n  \"priority\": \"normal\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/messages",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "messages"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Conversations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/messages/conversations?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "messages", "conversations"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"participantIds\": [\"user_id_1\", \"user_id_2\"],\n  \"type\": \"business\",\n  \"title\": \"Project Discussion\",\n  \"description\": \"Discussion about the ERP project requirements\",\n  \"relatedId\": \"requirement_id_here\",\n  \"relatedType\": \"requirement\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/messages/conversation",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "messages", "conversation"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/notifications?page=1&limit=20&unreadOnly=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "notifications"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "unreadOnly",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Notification as Read",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/notifications/:id/read",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "notifications", ":id", "read"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "notification_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Notification Settings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/notifications/settings",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "notifications", "settings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Notification Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channels\": {\n    \"inApp\": true,\n    \"email\": true,\n    \"sms\": false,\n    \"push\": true\n  },\n  \"categories\": {\n    \"business\": {\n      \"inApp\": true,\n      \"email\": true,\n      \"sms\": true,\n      \"push\": true\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/notifications/settings",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "notifications", "settings"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Tracking Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/tracking?entityType=purchaseOrder&status=in_transit",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "tracking"],
+              "query": [
+                {
+                  "key": "entityType",
+                  "value": "purchaseOrder"
+                },
+                {
+                  "key": "status",
+                  "value": "in_transit"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Tracking Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityId\": \"purchase_order_id_here\",\n  \"entityType\": \"purchaseOrder\",\n  \"status\": \"in_transit\",\n  \"currentLocation\": {\n    \"latitude\": 40.7128,\n    \"longitude\": -74.0060,\n    \"address\": \"New York, NY\",\n    \"city\": \"New York\",\n    \"state\": \"NY\",\n    \"country\": \"USA\"\n  },\n  \"estimatedArrival\": \"2024-02-15T10:00:00Z\",\n  \"vehicle\": {\n    \"type\": \"Truck\",\n    \"licensePlate\": \"ABC-123\",\n    \"driver\": {\n      \"name\": \"Mike Johnson\",\n      \"phone\": \"+1-555-0199\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/tracking",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "tracking"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Role Management Module",
+      "description": "Custom roles, sub-users, and permission management",
+      "item": [
+        {
+          "name": "Create Custom Role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Project_Manager\",\n  \"displayName\": \"Project Manager\",\n  \"description\": \"Manages projects and team members\",\n  \"permissions\": [\n    {\n      \"module\": \"requirements\",\n      \"actions\": [\"create\", \"read\", \"update\", \"approve\"],\n      \"level\": \"team\"\n    },\n    {\n      \"module\": \"purchaseOrders\",\n      \"actions\": [\"read\", \"update\"],\n      \"level\": \"company\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/roles/custom",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "roles", "custom"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Custom Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/roles/custom?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "roles", "custom"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Sub User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"subuser@example.com\",\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"phone\": \"+1-555-0123\",\n  \"systemRole\": \"IndustryMember\",\n  \"department\": \"Engineering\",\n  \"position\": \"Software Developer\",\n  \"sendInvitation\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/users/sub-users",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "users", "sub-users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sub Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/users/sub-users?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "users", "sub-users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Permission Templates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/permissions/templates",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "permissions", "templates"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Approval Requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/approvals?status=pending",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "approvals"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "pending"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Process Approval Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"approve\",\n  \"comments\": \"Request approved after review\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/approvals/:id/process",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "approvals", ":id", "process"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "approval_request_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get System Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/roles/system",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "roles", "system"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Available Permissions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/permissions",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "permissions"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Vendor Module",
+      "description": "Vendor management and operations (placeholder endpoints)",
+      "item": [
+        {
+          "name": "Create Vendor User (Legacy)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"vendor@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"companyName\": \"Vendor Corp\",\n  \"vendorCategory\": \"service\",\n  \"contactInfo\": {\n    \"primaryContact\": \"Vendor Manager\",\n    \"phone\": \"+1-555-0199\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/user/create-user000",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "user", "create-user000"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Vendor Profile (Legacy)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/user/get-profile000",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "user", "get-profile000"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "MFA & Security",
+      "description": "Multi-factor authentication and security features",
+      "item": [
+        {
+          "name": "Enable MFA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"method\": \"email\",\n  \"value\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/mfa/enable",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "mfa", "enable"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify MFA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"123456\",\n  \"method\": \"email\",\n  \"isLoginVerification\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/mfa/verify",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "mfa", "verify"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Disable MFA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"SecurePass123!\",\n  \"method\": \"email\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/mfa/disable",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "mfa", "disable"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Generate Backup Codes",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/mfa/backup-codes",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "mfa", "backup-codes"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Company Management",
+      "description": "Company member management and administration",
+      "item": [
+        {
+          "name": "Get Company Members",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/company/members",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "company", "members"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Company Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newmember@example.com\",\n  \"role\": \"IndustryMember\",\n  \"firstName\": \"New\",\n  \"lastName\": \"Member\",\n  \"phone\": \"+1-555-0123\",\n  \"sendInvitation\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/company/members",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "company", "members"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Company Member",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/company/members/:memberId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "company", "members", ":memberId"],
+              "variable": [
+                {
+                  "key": "memberId",
+                  "value": "member_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Member Role",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"IndustryAdmin\",\n  \"reason\": \"Promotion to admin role\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/company/members/:memberId/role",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "company", "members", ":memberId", "role"],
+              "variable": [
+                {
+                  "key": "memberId",
+                  "value": "member_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Approval Workflow",
+      "description": "User approval and document management",
+      "item": [
+        {
+          "name": "Get Pending Approvals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/approvals/pending",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "approvals", "pending"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"approve\",\n  \"notes\": \"User approved after document verification\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/approvals/:userId/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "approvals", ":userId", "approve"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reject User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Incomplete documentation provided\",\n  \"allowReapplication\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/approvals/:userId/reject",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "approvals", ":userId", "reject"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Approval Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/approval-status",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "approval-status"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Approval Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "document",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "documentType",
+                  "value": "identity",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Government issued ID",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/documents/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "documents", "upload"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Social Authentication",
+      "description": "OAuth and social login endpoints",
+      "item": [
+        {
+          "name": "Google OAuth Redirect",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/google",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "google"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "LinkedIn OAuth Redirect",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/linkedin",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "linkedin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Microsoft OAuth Redirect",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/microsoft",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "microsoft"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Social Login Callback",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"google\",\n  \"code\": \"oauth_code_here\",\n  \"state\": \"optional_state_parameter\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/auth/social/callback",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "auth", "social", "callback"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Document Management",
+      "description": "Document upload, management, and versioning",
+      "item": [
+        {
+          "name": "Upload Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "document",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "entityId",
+                  "value": "requirement_id_here",
+                  "type": "text"
+                },
+                {
+                  "key": "entityType",
+                  "value": "requirement",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "specification",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/documents/upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "documents", "upload"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Documents",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/documents?page=1&limit=20&entityType=requirement",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "documents"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "entityType",
+                  "value": "requirement"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Download Document",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/documents/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "documents", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "document_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Document",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/documents/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "documents", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "document_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Compliance Management",
+      "description": "ISO compliance, assessments, and reporting",
+      "item": [
+        {
+          "name": "Get Compliance Records",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/compliance?page=1&limit=10&standard=ISO-9001",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "compliance"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "standard",
+                  "value": "ISO-9001"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Compliance Assessment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityId\": \"industry_profile_id_here\",\n  \"entityType\": \"industry\",\n  \"standard\": \"ISO-9001\",\n  \"version\": \"2015\",\n  \"score\": 85,\n  \"maxScore\": 100,\n  \"status\": \"compliant\",\n  \"findings\": [\n    {\n      \"category\": \"Documentation\",\n      \"description\": \"Process documentation is well maintained\",\n      \"severity\": \"low\",\n      \"recommendation\": \"Continue current practices\"\n    }\n  ],\n  \"nextAssessmentDate\": \"2025-01-15T00:00:00Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/compliance/assessment",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "compliance", "assessment"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics & Reports",
+      "description": "Performance analytics, spending reports, and business intelligence",
+      "item": [
+        {
+          "name": "Get Performance Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/analytics/performance?startDate=2024-01-01&endDate=2024-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "analytics", "performance"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Spending Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/analytics/spending?startDate=2024-01-01&endDate=2024-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "analytics", "spending"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Professional Performance Analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/analytics/performance?period=month",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "analytics", "performance"],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "month"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Earnings Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/reports/earnings?startDate=2024-01-01&endDate=2024-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "reports", "earnings"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment Management",
+      "description": "Payment processing, invoicing, and financial operations",
+      "item": [
+        {
+          "name": "Get Payments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/payments?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "payments"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Process Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"milestoneId\": \"milestone_id_here\",\n  \"amount\": 25000,\n  \"paymentMethod\": \"bank_transfer\",\n  \"reference\": \"PO-2024-001-M1\",\n  \"notes\": \"First milestone payment\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/payments/:id/process",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "payments", ":id", "process"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "payment_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payment Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/industry/payments/:id/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "industry", "payments", ":id", "status"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "payment_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Professional Payment Info",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"preferredMethod\": \"bank_transfer\",\n  \"bankDetails\": {\n    \"accountNumber\": \"1234567890\",\n    \"routingNumber\": \"021000021\",\n    \"bankName\": \"Chase Bank\",\n    \"accountHolderName\": \"John Doe\"\n  },\n  \"taxInfo\": {\n    \"taxId\": \"123-45-6789\",\n    \"isUSTaxpayer\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/payment-info",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "payment-info"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payment History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/professionals/payments/history?page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "professionals", "payments", "history"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin & Audit",
+      "description": "Administrative functions and audit trails",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/users?page=1&limit=20&status=active",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "status",
+                  "value": "active"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"reason\": \"Account verification completed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/users/:id/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "users", ":id", "status"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Role to User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleType\": \"system\",\n  \"systemRole\": \"IndustryAdmin\",\n  \"reason\": \"Promotion to admin role\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/users/:id/role",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "users", ":id", "role"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "user_id_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/audit-logs?page=1&limit=50&category=user_management",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "audit-logs"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "key": "category",
+                  "value": "user_management"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Activity Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/reports/user-activity?dateFrom=2024-01-01&dateTo=2024-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "reports", "user-activity"],
+              "query": [
+                {
+                  "key": "dateFrom",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "dateTo",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Role Usage Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/reports/role-usage",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "reports", "role-usage"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Invitation Management",
+      "description": "User invitation and onboarding",
+      "item": [
+        {
+          "name": "Accept Invitation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"invitation_token_here\",\n  \"password\": \"SecurePass123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"+1-555-0123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/invitations/accept",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "invitations", "accept"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Validate Invitation Token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}{{apiVersion}}/admin/invitations/validate/:token",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiVersion}}", "admin", "invitations", "validate", ":token"],
+              "variable": [
+                {
+                  "key": "token",
+                  "value": "invitation_token_here"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Auto-set auth token from login response",
+          "if (pm.response && pm.response.json() && pm.response.json().meta && pm.response.json().meta.access_token) {",
+          "    pm.environment.set('authToken', pm.response.json().meta.access_token);",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Auto-extract auth token from login responses",
+          "if (pm.response.json() && pm.response.json().meta && pm.response.json().meta.access_token) {",
+          "    pm.environment.set('authToken', pm.response.json().meta.access_token);",
+          "    console.log('Auth token updated:', pm.response.json().meta.access_token);",
+          "}",
+          "",
+          "// Basic response validation",
+          "pm.test('Response has status field', function () {",
+          "    pm.expect(pm.response.json()).to.have.property('status');",
+          "});",
+          "",
+          "pm.test('Response time is less than 5000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});"
+        ]
+      }
+    }
+  ]
+}
